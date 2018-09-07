@@ -1,21 +1,39 @@
 package com.blog.blog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
+        List<Post> allPosts = new ArrayList<>();
 
-    @RequestMapping(path = "/posts", method = RequestMethod.GET)
-    @ResponseBody
-    public String getAllPosts() {
-        return "post index page";
+
+
+        public PostController() {
+            allPosts.add(new Post("PS4", "Come and get it"));
+            allPosts.add(new Post("Rolex watch", "great condition. Antique"));
+            allPosts.add(new Post("Wood table", "Seats 14. Can go outdoors or indoors. Made of Oak and pine."));
+
+        }
+
+
+        @RequestMapping(path = "/posts", method = RequestMethod.GET)
+    public String index(Model viewModel) {
+
+            viewModel.addAttribute("posts", allPosts);
+
+            return "posts/index";
     }
 
     @RequestMapping("/posts/{id}")
-    @ResponseBody
-    public String showIndividualPost(@PathVariable int id) {
-        return "individual post" + id;
+    public String show(@PathVariable int id, Model vModel) {
+        Post newPost = allPosts.get( (int) id - 1);
+        vModel.addAttribute("post", newPost);
+        return "posts/show";
     }
 
 
@@ -30,5 +48,9 @@ public class PostController {
     public String createPost() {
         return "New created post";
     }
+
+
+
+
 
 }
