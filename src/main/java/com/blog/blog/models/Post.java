@@ -1,12 +1,23 @@
-package com.blog.blog;
+package com.blog.blog.models;
 
 import org.springframework.stereotype.Controller;
 
-@Controller
+import javax.persistence.*;
+
+@Entity
+@Table(name="posts")
 public class Post {
-    private String title;
-    private String body;
+    @Id
+    @GeneratedValue
     private long id;
+
+    @Column(nullable = false, length = 100)
+    private String title;
+
+    @Column(nullable = false)
+    private String body;
+
+
 
     public Post() {
 
@@ -48,4 +59,5 @@ public class Post {
     public void setId(long id) {
         this.id = id;
     }
+
 }

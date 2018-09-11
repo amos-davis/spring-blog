@@ -1,39 +1,68 @@
 package com.blog.blog.services;
 
-import com.blog.blog.Post;
+import com.blog.blog.models.Post;
+import com.blog.blog.repositories.PostRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostService {
-    private List<Post> posts;
+//    private List<Post> posts;
 
+    private PostRepository postDao;
 
-    public PostService() {
-        posts = new ArrayList<>();
-        createPosts();
+    public PostService(PostRepository postDao) {
+        this.postDao = postDao;
+
     }
 
-    public Post findOne(long id) {
-        return posts.get((int) id - 1);
+//    @GetMapping("/posts")
+//    public String index(Model model) {
+//        model.addAttribute("posts", postDao.findAll());
+//        return "posts/index";
+//    }
+
+
+
+//    public PostService() {
+//        posts = new ArrayList<>();
+//        createPosts();
+//    }
+
+//    public Post findOne(long id) {
+//        return postDao.get((int) id - 1);
+//    }
+
+
+
+//    public List<Post> findAll() { return postDao;
+//    }
+
+//    private void createPosts() {
+//        postDao. (new Post("PS4", "Come and get it"));
+//        postDao.add(new Post("Rolex watch", "great condition. Antique"));
+//        postDao.add(new Post("Wood table", "Seats 14. Can go outdoors or indoors. Made of Oak and pine."));
+//        postDao.add(new Post("hat", "Barely worn baseball cap."));
+//    }
+
+    public Post save(Post post) {
+        postDao.save(post);
+        return post;
     }
 
     public List<Post> findAll() {
-        return posts;
+        return postDao.findAll();
     }
 
-    private void createPosts() {
-        posts.add(new Post("PS4", "Come and get it"));
-        posts.add(new Post("Rolex watch", "great condition. Antique"));
-        posts.add(new Post("Wood table", "Seats 14. Can go outdoors or indoors. Made of Oak and pine."));
-        posts.add(new Post("hat", "Barely worn baseball cap."));
+    public Post findOne(long id) {
+        return postDao.findById(id);
     }
 
-    public Post save(Post post) {
-        post.setId(posts.size() + 1);
-        posts.add(post);
-        return post;
-    }
+//    public Post update(Post post) {
+//        post.
+//    }
+
 }
