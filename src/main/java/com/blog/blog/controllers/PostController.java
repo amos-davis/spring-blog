@@ -19,7 +19,6 @@ public class PostController {
 
         @GetMapping(path = "/posts")
     public String index(Model viewModel) {
-
             viewModel.addAttribute("posts", postSvc.findAll());
 
             return "posts/index";
@@ -41,7 +40,7 @@ public class PostController {
     @ResponseBody
     public String createPost() {
 
-            return "New created post";
+            return "redirect:/posts";
     }
 
     @GetMapping("/posts/create")
