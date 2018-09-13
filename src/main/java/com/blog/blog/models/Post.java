@@ -17,21 +17,29 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
+//    @JoinColumn (name = "user_id")
+    @ManyToOne
+    private User user;
+
 
 
     public Post() {
 
     }
 
-    public Post(String title, String body) {
+
+
+    public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;
+        this.user = user;
     }
 
-    public Post(String title, String body, long id) {
+    public Post(String title, String body, long id, User user) {
         this.title = title;
         this.body = body;
         this.id = id;
+        this.user = user;
     }
 
 
@@ -60,4 +68,11 @@ public class Post {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
