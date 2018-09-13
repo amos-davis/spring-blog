@@ -6,11 +6,11 @@
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
 
-    <body class="container">
-        <main>
+    <main class="container">
+
         <h2>Create Post</h2>
 
-        <form action="'/posts/create'" th:method="POST" th:object="${post}">
+        <form th:action="'/posts/create'" th:method="POST" th:object="${post}">
             <div class ="form-group">
                 <label for="title">Title:</label>
                 <input class="form-control" id="title" type="text" placeholder="Enter title" th:field="*{title}" />
@@ -23,11 +23,11 @@
             <button class="btn btn-success">Submit</button>
         </form>
 
-        </main>
+    </main>
 
         <footer th:replace="fragments/footer :: footer"></footer>
 
         <script th:replace="fragments/scripts :: scripts"></script>
-    </body>
+
 
 </html>

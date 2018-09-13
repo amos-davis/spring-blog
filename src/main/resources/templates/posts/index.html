@@ -2,11 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments/head :: head('List of all post')"></head>
 
-    <body class="container">
+    <main class="container">
 
     <h1>Now showing all posts</h1>
 
-    <div class="row" th:each="post : ${posts}">
 
         <div th:each="post : ${posts}">
             <h2 th:text="${post.title}"></h2>
@@ -14,8 +13,7 @@
             <button class="btn btn-secondary">Add a post</button>
         </div>
 
-    </div>
+    </main>
 
     <script th:replace="fragments/scripts :: scripts"></script>
-    </body>
 </html>
