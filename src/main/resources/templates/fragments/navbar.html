@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8" />
     <title>Navbar-Partial</title>
@@ -25,6 +25,18 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li>
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                </form>
+
+                <div sec:authorize="isAuthenticated()">
+                     login:
+                    <!--User ID: <span th:text="${#authentication.principal.id}"/>-->
+                    Username: <span th:text="${#authentication.principal.username}"/>
+                    <!--Email: <span th:text="${#authentication.principal.email}"/>-->
+                </div>
             </li>
         </ul>
     </div>

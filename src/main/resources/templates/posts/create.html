@@ -10,7 +10,7 @@
 
         <h2>Create Post</h2>
 
-        <form th:action="'/posts/create'" th:method="POST" th:object="${post}">
+        <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
             <div class ="form-group">
                 <label for="title">Title:</label>
                 <input class="form-control" id="title" type="text" placeholder="Enter title" th:field="*{title}" />

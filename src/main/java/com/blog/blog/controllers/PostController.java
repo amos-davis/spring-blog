@@ -1,6 +1,7 @@
 package com.blog.blog.controllers;
 
 import com.blog.blog.models.Post;
+import com.blog.blog.models.User;
 import com.blog.blog.repositories.PostRepository;
 import com.blog.blog.repositories.UserRepository;
 import com.blog.blog.services.PostService;
@@ -65,11 +66,11 @@ public class PostController {
             return "posts/create";
     }
 
-//    @GetMapping("/posts/{id}/edit")
-//    public String postEditForm(@PathVariable long id, Model model) {
-//        model.addAttribute("post", postRepository.findOne(id));
-//        return "posts/edit";
-//    }
+    @GetMapping("/posts/{id}/edit")
+    public String postEditForm(@PathVariable long id, Model model) {
+        model.addAttribute("post", postRepository.findOne(id));
+        return "posts/edit";
+    }
 
     @PostMapping("/posts/{id}/edit")
     public String updatePost(@ModelAttribute Post post) {
@@ -77,11 +78,21 @@ public class PostController {
         return "redirect:/posts";
     }
 
-//    @PostMapping("/posts/delete")
-//    public String deletePost(@RequestParam(name = "id") long id){
-//        postRepository.delete(id);
-//        return "redirect:/posts";
-//    }
+    @PostMapping("/posts/delete")
+    public String deletePost(@RequestParam(name = "id") long id){
+        postRepository.delete(id);
+        return "redirect:/posts";
+    }
 
+    @GetMapping("/find-user/{query}")
+    @ResponseBody
+    public String findUser(@PathVariable String query){
 
+        User user = userRepository.findByUsername(query);
+
+//        System.out.println("user.getEmail() = " + user.getEmail());
+
+        return user.getUsername();
+
+    }
 }
